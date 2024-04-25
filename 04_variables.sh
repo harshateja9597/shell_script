@@ -9,6 +9,15 @@ then
     else
     echo "you are a root user"  
 fi
+
+sudo yum install mysql -y
+ 
+if [ $? -ne 0 ]
+then 
+    echo "mysql is not installed"
+else
+    echo "my sql is installed"
+fi
  
 
 
