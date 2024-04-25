@@ -10,7 +10,7 @@ then
     echo "you are a root user"  
 fi
 
-sudo yum install mysql -y
+sudo yum install mysql-server -y
  
 if [ $? -ne 0 ]
 then 
