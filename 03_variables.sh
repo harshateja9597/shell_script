@@ -2,5 +2,5 @@
 
 DATE=$(date)
 
-echo "today date and tome is $DATE"
+echo "today date and time is $DATE"
 
