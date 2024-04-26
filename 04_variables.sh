@@ -31,7 +31,7 @@ then
     echo -e " $G you are a root user $N"  
 fi
 
-yum install mysql -y &>> $LOGFILE
+yum install mysql-server -y &>> $LOGFILE
  
 validate $? "installing myql"
 
