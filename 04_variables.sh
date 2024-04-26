@@ -8,7 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-echo "script started executing $DATE >>& $LOGFILE"
+echo "script started executing $DATE &>> $LOGFILE"
 
 
 validate(){
@@ -28,14 +28,14 @@ then
     echo -e " $R you are not a root user $N"
     exit 1
     else
-    echo " $G you are a root user $N"  
+    echo -e " $G you are a root user $N"  
 fi
 
-yum install mysql -y >>& $LOGFILE
+yum install mysql -y &>> $LOGFILE
  
 validate $? "installing myql"
 
-yum install git -y >>& $LOGFILE
+yum install git -y &>> $LOGFILE
 
 validate $? "installing git"
 
