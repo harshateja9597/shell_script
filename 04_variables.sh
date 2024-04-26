@@ -1,4 +1,25 @@
 #!/bin/bash
+DATE=$(date)
+
+LOGFILE="/tmp/$0-$DATE.log"
+
+R=\e[31m
+G=\e[32m
+Y=\e[33m
+N=\e[0m
+
+echo "script started executing $DATE >>& $LOGFILE"
+
+
+validate(){
+    if [ $1 -ne 0 ]
+then 
+    echo -e " $R $2 $N not installed"
+    exit 1
+else
+    echo -e "$G $2 $N installed"
+fi
+}
 
 USER=$(id -u)
 
@@ -10,14 +31,12 @@ then
     echo "you are a root user"  
 fi
 
-sudo yum install mysql-server -y
+yum install mysql -y >>& $LOGFILE
  
-if [ $? -ne 0 ]
-then 
-    echo "mysql is not installed"
-else
-    echo "my sql is installed"
-fi
- 
+validate() $? "installing myql"
+
+yum install git -y >>& $LOGFILE
+
+validate() $? "installing git"
 
 
