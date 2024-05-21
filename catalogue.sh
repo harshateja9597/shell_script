@@ -28,65 +28,65 @@ else
     echo -e "$g you are root user $n"
 fi
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $logfile
 
-validate $? "disabling current nodejs" &>> $logfile
+validate $? "disabling current nodejs" 
 
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>> $logfile
 
-validate $? "enabling nodejs:18" &>> $logfile
+validate $? "enabling nodejs:18" 
 
-dnf inatall  nodejs -y
+dnf inatall  nodejs -y &>> $logfile
 
-validate $? "installing nodejs:18" &>> $logfile
+validate $? "installing nodejs:18" 
 
-useradd roboshop
+useradd roboshop &>> $logfile
 
-validate $? "addng roboshop user" &>> $logfile
+validate $? "addng roboshop user" 
 
-mkdir /app
+mkdir /app &>> $logfile
 
-validate $? "creating app directory" &>> $logfile
+validate $? "creating app directory" 
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $logfile
 
-validate $? "downloading ccatalogue application" &>> $logfile
+validate $? "downloading ccatalogue application" 
 
-cd /app
+cd /app &>> $logfile
 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>> $logfile
 
-validate $? "unzipping catalogue" &>> $logfile
+validate $? "unzipping catalogue" 
 
-npm install 
+npm install &>> $logfile
 
-validate $? "installing dependencies" &>> $logfile
+validate $? "installing dependencies" 
 
 #use absolute path because you are in another directory 
-cp /home/centos/shell_script/catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/shell_script/catalogue.service /etc/systemd/system/catalogue.service &>> $logfile
 
-validate $? "copying catalogue.service file" &>> $logfile
+validate $? "copying catalogue.service file" 
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $logfile
 
-validate $? "catalogue daemon reload" &>> $logfile
+validate $? "catalogue daemon reload" 
 
-systemctl enable catalogue
+systemctl enable catalogue &>> $logfile
 
-validate $? "enabling catalogue" &>> $logfile
+validate $? "enabling catalogue" 
 
-systemctl start catalogue
+systemctl start catalogue &>> $logfile
 
-validate $? "starting catalogue" &>> $logfile
+validate $? "starting catalogue" 
 
-cp /home/centos/shell_script/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/shell_script/mongo.repo /etc/yum.repos.d/mongo.repo &>> $logfile
 
-validate $? "copying mongo.repo" &>> $logfile
+validate $? "copying mongo.repo" 
 
-dnf install mongodg-org-shell -y
+dnf install mongodg-org-shell -y &>> $logfile
 
 validate $? "installing mongodb client"
 
-mongodb --host $mongodb_host </app/schema/catalogue.js
+mongodb --host $mongodb_host </app/schema/catalogue.js &>> $logfile
 
 validate $? "loading catalogue data into mongodb"
