@@ -32,19 +32,23 @@ dnf module disable nodejs -y &>> $logfile
 
 validate $? "disabling current nodejs" 
 
- dnf module enable nodejs:18 -y &>> $logfile
+dnf module enable nodejs:18 -y &>> $logfile
 
 validate $? "enabling nodejs:18" 
 
-dnf inatall  nodejs -y &>> $logfile
+dnf inatall nodejs -y &>> $logfile
 
-validate $? "installing nodejs:18" 
+validate $? "installing nodejs:18"
 
-useradd roboshop &>> $logfile
+id roboshop
+if [ $? -ne 0 ]
+then
+    useradd roboshop
+else
+    echo "user alrady exists"
+fi
 
-validate $? "addng roboshop user" 
-
-mkdir /app &>> $logfile
+mkdir -p /app &>> $logfile
 
 validate $? "creating app directory" 
 
@@ -54,7 +58,7 @@ validate $? "downloading ccatalogue application"
 
 cd /app &>> $logfile
 
-unzip /tmp/catalogue.zip &>> $logfile
+unzip -o /tmp/catalogue.zip &>> $logfile
 
 validate $? "unzipping catalogue" 
 
