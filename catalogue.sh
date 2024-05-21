@@ -32,7 +32,7 @@ dnf module disable nodejs -y &>> $logfile
 
 validate $? "disabling current nodejs" 
 
-dnf module enable nodejs:18 -y &>> $logfile
+ dnf module enable nodejs:18 -y &>> $logfile
 
 validate $? "enabling nodejs:18" 
 
