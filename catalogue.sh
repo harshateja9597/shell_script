@@ -36,7 +36,7 @@ dnf module enable nodejs:18 -y &>> $logfile
 
 validate $? "enabling nodejs:18" 
 
-dnf inatall nodejs -y &>> $logfile
+yum inatall nodejs -y &>> $logfile
 
 validate $? "installing nodejs:18"
 
